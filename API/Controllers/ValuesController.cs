@@ -16,7 +16,6 @@ namespace DatingApp.API.Controllers
         public ValuesController(DataContext context)
         {
             _context = context;
-
         }
 
         // GET api/values
@@ -33,6 +32,12 @@ namespace DatingApp.API.Controllers
         public async Task<ActionResult<string>> Get(int id)
         {
             var value = await _context.Values.FindAsync(id);
+
+            if (value == null)
+            {
+                return NotFound();
+            }
+
             return Ok(value);
         }
 
